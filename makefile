@@ -13,8 +13,5 @@ clean:
 demo:
 	make build
 
-	echo "hello"
 	go run . -f examples/hello.pfth include/stdlib.so
-
-	echo "math"
 	go run . -f examples/math.pfth include/stdlib.so
