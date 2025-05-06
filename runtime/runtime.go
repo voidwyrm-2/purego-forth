@@ -66,13 +66,6 @@ func (i *Interpreter) Execute(text string) ([]int, error) {
 		if n, err := strconv.Atoi(tok); err == nil {
 			push(n)
 			pos++
-		} else if tok == "echo" { // have to implement echo and emit this way because printf won't work for some reason
-			if len(stack) == 0 {
-				return errf("stack underflow")
-			}
-
-			fmt.Println(pop())
-			pos++
 		} else if tok == "emit" {
 			if len(stack) == 0 {
 				return errf("stack underflow")

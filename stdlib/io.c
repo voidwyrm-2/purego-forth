@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stdio.h>
+#include <unistd.h>
 
 int echo(push_t, pop_t, int slen) {
   if (slen == 0) {
@@ -7,8 +8,9 @@ int echo(push_t, pop_t, int slen) {
   }
 
   int n = pop();
-
-  printf("%d", n);
+  char buf[64];
+  int sz = sprintf(buf, "%d\n", n);
+  write(1, buf, sz);
 
   return 0;
 }
