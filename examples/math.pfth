@@ -1,0 +1,6 @@
+20 30 add
+10 50 mul
+
+90 40 sub
+60 2 div
+dump
