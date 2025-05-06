@@ -1,5 +1,8 @@
+all: build demo
+
 build: init
-	gcc -shared -o include/stdlib.so stdlib/*.c
+	# -fPIC needed or stdout/stderr cause link error
+	gcc -shared -fPIC -o include/stdlib.so stdlib/*.c
 
 init: clean
 	mkdir -p include

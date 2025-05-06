@@ -6,14 +6,11 @@ int echo(push_t, pop_t, int slen) {
   if (slen == 0) {
     return 1;
   }
-
   int n = pop();
-  char buf[64];
-  int sz = sprintf(buf, "%d\n", n);
-  write(1, buf, sz);
-
+  fprintf(stdout, "%d\n", n);
   return 0;
 }
+
 /*
 int emit(push_t, pop_t, int slen) {
   if (slen == 0) {
