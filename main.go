@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"io"
 	"os"
 
 	"github.com/voidwyrm-2/purego-forth/runtime"
@@ -9,14 +10,28 @@ import (
 
 func _main() error {
 	inputPath := flag.String("f", "", "The file to interpret")
+	readStdin := flag.Bool("in", false, "Read from stdin")
 
 	flag.Parse()
 
 	libraries := flag.Args()
 
-	content, err := os.ReadFile(*inputPath)
-	if err != nil {
-		return err
+	content := ""
+
+	if *readStdin {
+		raw, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return err
+		}
+
+		content = string(raw)
+	} else {
+		raw, err := os.ReadFile(*inputPath)
+		if err != nil {
+			return err
+		}
+
+		content = string(raw)
 	}
 
 	interp, err := runtime.New(libraries)
@@ -24,7 +39,7 @@ func _main() error {
 		return err
 	}
 
-	_, err = interp.Execute(string(content))
+	_, err = interp.Execute(content)
 	if err != nil {
 		return err
 	}

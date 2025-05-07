@@ -1,8 +1,8 @@
 #define push_t void (*push)(int n)
 #define pop_t int (*pop)(void)
 
-#define check_underflow()                                                      \
-  if (slen == 0) {                                                             \
+#define expect_atleast(count_)                                                 \
+  if (slen < count_) {                                                         \
     return 1;                                                                  \
   }
 
@@ -10,9 +10,7 @@
 
 #define math_f(name_, op_)                                                     \
   int name_(push_t, pop_t, int slen) {                                         \
-    if (slen < 2) {                                                            \
-      return 1;                                                                \
-    }                                                                          \
+    expect_atleast(2);                                                         \
                                                                                \
     int y = pop();                                                             \
     int x = pop();                                                             \

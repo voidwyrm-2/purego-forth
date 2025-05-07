@@ -2,25 +2,41 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int echo(push_t, pop_t, int slen) {
-  if (slen == 0) {
-    return 1;
-  }
+// NOTICE: -fPIC does not fix the issue stdout/in when on darwin/arm64
+// do not change this until a solution is figured out
+
+stack_f(echo, {
+  expect_atleast(1);
+
   int n = pop();
-  fprintf(stdout, "%d\n", n);
-  return 0;
-}
 
+  char buf[64];
+  int sz = sprintf(buf, "%d\n", n);
+  write(1, buf, sz);
+
+  return 0;
+});
+
+stack_f(emit, {
+  expect_atleast(1);
+
+  int n = pop();
+
+  char buf[3];
+  int sz = sprintf(buf, "%c\n", n);
+  write(1, buf, sz);
+
+  return 0;
+});
+
+// experimental, doesn't work that well
 /*
-int emit(push_t, pop_t, int slen) {
-  if (slen == 0) {
-    return 1;
-  }
+stack_f(inputc, {
+  char buf[1];
+  read(0, buf, 1);
 
-  int n = call_f(pop);
-
-  printf("%c", n);
+  push((int)buf[0]);
 
   return 0;
-}
+});
 */
