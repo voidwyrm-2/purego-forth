@@ -1,5 +1,7 @@
 # Purego Forth
 
+### This branch is for testing C++ interop, nothing is guaranteed to work
+
 This is a Forth dialect whose standard library is (almost) entirely written in C, via ebitengine's [purego](https://github.com/ebitengine/purego)
 
 # Installation

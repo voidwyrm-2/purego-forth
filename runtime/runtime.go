@@ -91,7 +91,14 @@ func (i *Interpreter) Execute(text string) ([]int, error) {
 
 			env.Retrieve(tok, &fptr)
 
-			switch rc := fptr(push, pop, len(stack)); rc {
+			rc := fptr(push, pop, len(stack))
+
+			if rc < 0 {
+				fmt.Println("function '" + tok + "' has been marked as experimental")
+				rc = (-rc) - 1
+			}
+
+			switch rc {
 			case 0:
 				pos++
 			case 1:

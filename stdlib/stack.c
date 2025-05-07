@@ -10,6 +10,7 @@ math_f(rem, %);
 
 // stack operations
 
+/*
 stack_f(dup, {
   expect_atleast(1);
 
@@ -20,6 +21,7 @@ stack_f(dup, {
 
   return 0;
 });
+*/
 
 stack_f(swap, {
   expect_atleast(2);
